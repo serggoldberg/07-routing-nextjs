@@ -4,12 +4,13 @@ import { fetchNotes } from '@/lib/api';
 interface UseNotesProps {
   page: number;
   search: string;
+  tag?: string;
 }
 
-export const useNotes = ({ page, search }: UseNotesProps) => {
+export const useNotes = ({ page, search, tag }: UseNotesProps) => {
   return useQuery({
-    queryKey: ['notes', page, search],
-    queryFn: () => fetchNotes(page, search),
+    queryKey: ['notes', page, search, tag],
+    queryFn: () => fetchNotes(page, search, tag),
     placeholderData: keepPreviousData,
   });
 };

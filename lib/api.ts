@@ -16,10 +16,11 @@ interface FetchNotesResponse {
 
 export const fetchNotes = async (
   page: number,
-  search: string
+  search: string,
+  tag?: string
 ): Promise<FetchNotesResponse> => {
   const response = await api.get<FetchNotesResponse>('/notes', {
-    params: { page, perPage: 12, search },
+    params: { page, perPage: 12, search, ...(tag && tag !== 'all' && { tag }) },
   });
   return response.data;
 };

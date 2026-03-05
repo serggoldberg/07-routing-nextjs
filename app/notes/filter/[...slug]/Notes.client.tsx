@@ -11,12 +11,16 @@ import { useState } from 'react';
 import { useNotes } from '@/hooks/useNotes';
 import { useDebouncedCallback } from 'use-debounce';
 
-export default function NotesClient() {
+interface NotesClientProps {
+  tag?: string;
+}
+
+export default function NotesClient({ tag, }: NotesClientProps) {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { data, isLoading, isError } = useNotes({ page, search });
+  const { data, isLoading, isError } = useNotes({ page, search, tag });
 
   const handlePageChange = (selected: number) => {
     setPage(selected);
